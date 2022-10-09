@@ -1,0 +1,26 @@
+.header__link-small {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  text-decoration: none;
+  align-self: flex-end;
+}
+
+.header__link-small:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 580px) {
+  .header__link-small {
+    margin: 18px auto 27px;
+    text-align: center;
+    width: 320px;
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgb(84, 84, 84, 0.7);
+  }
+}

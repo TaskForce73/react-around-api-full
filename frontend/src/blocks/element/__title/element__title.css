@@ -1,0 +1,7 @@
+.element__title {
+  padding: 25px 15px 31px 21px;
+  display: flex;
+  width: 246px;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -1,0 +1,14 @@
+.page{
+    max-width: 880px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 320px) {
+    .page{
+      max-width: 320px;
+    }
+  }

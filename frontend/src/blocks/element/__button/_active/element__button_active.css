@@ -1,0 +1,4 @@
+.element__button_active {
+  opacity: 1;
+  background-image: url(../../../../images/blackheart.svg);
+}

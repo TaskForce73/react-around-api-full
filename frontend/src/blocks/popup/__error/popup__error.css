@@ -1,0 +1,25 @@
+.popup__error {
+  max-width: 358px;
+  height: 20px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  padding: 5px 36px 13px;
+  margin: 0;
+}
+.popup__error:nth-last-child(2) {
+  padding: 5px 36px 31.34px;
+}
+
+@media screen and (max-width: 580px) {
+  .popup__error {
+    max-width: 238px;
+    padding: 5px 22px 13px;
+  }
+  .popup__error:nth-last-child(2) {
+    padding: 5px 22px 0px;
+  }
+}

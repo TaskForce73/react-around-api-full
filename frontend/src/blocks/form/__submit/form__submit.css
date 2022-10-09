@@ -1,0 +1,32 @@
+.form__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000;
+  background-color: #ffffff;
+  margin: 216px auto 0;
+  min-width: 358px;
+  min-height: 50px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.form__submit:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+@media screen and (max-width: 580px) {
+  .form__submit {
+    font-size: 16px;
+    line-height: 19.36px;
+    margin: 173px auto 0;
+    min-width: 260px;
+    min-height: 46px;
+  }
+}

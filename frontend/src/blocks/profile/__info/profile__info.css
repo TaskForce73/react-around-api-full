@@ -1,0 +1,35 @@
+.profile__info {
+  color: white;
+  display: grid;
+  width: 415px;
+  align-self: center;
+  grid-template-columns: 373px 24px;
+  grid-template-rows: 39px 22px;
+  grid-column-gap: 18px;
+  grid-row-gap: 16px;
+  margin-left: 30px;
+  margin-top: 22px;
+  margin-bottom: 21px;
+}
+
+@media screen and (max-width: 580px) {
+  .profile__info {
+    max-width: 282px;
+    width: 282px;
+    grid-template-columns: 1fr 47px;
+    grid-column-gap: 10px;
+    grid-row-gap: 14px;
+    align-items: flex-end;
+    align-self: flex-start;
+    grid-template-rows: 22px 14px;
+    margin: 26.25px 0 36px;
+  }
+}
+
+@media screen and (min-width: 581px) and (max-width: 879px) {
+  .profile__info {
+    width: 229px;
+    max-width: 229px;
+    grid-template-columns: 205px 24px;
+  }
+}

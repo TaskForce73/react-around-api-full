@@ -1,0 +1,7 @@
+.popup__body {
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  max-width: 430px;
+}

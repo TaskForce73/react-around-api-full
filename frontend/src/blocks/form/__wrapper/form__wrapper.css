@@ -1,0 +1,15 @@
+.form__wrapper {
+  width: 358px;
+  margin: 60px auto 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 580px) {
+  .form__wrapper {
+    width: 260px;
+    margin: 40px auto 42px;
+  }
+}
