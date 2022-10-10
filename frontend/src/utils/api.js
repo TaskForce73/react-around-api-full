@@ -76,13 +76,14 @@ class Api {
     }).then(this._checkResponse);
   }
 }
-
+const jwt = localStorage.getItem('jwt');
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  baseUrl: "https://api.task.students.nomoredomainssbs.ru",
   headers: {
-    authorization: "32b9efa0-6f35-4afe-975e-e3a6be43cfcb",
-    "Content-Type": "application/json",
-  },
+    Accept: "application/json",
+    Authorization: `Bearer ${jwt}`,
+    "Content-Type": "application/json"
+}
 });
 
 export default api;

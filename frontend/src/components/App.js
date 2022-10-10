@@ -145,8 +145,8 @@ function App() {
   useEffect(() => {
     api
       .getInitialCards()
-      .then((userData) => {
-        setCards(userData);
+      .then((res) => {
+        setCards(res);
       })
       .catch((err) => {
         console.log(err);
