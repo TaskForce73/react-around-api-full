@@ -61,8 +61,8 @@ module.exports.updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,
     {
-      name: req.user.name,
-      about: req.user.about,
+      name: req.body.name,
+      about: req.body.about,
     },
     { new: true, runValidators: true }
   )
@@ -78,7 +78,7 @@ module.exports.updateProfile = (req, res, next) => {
 module.exports.updateAvatar = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,
-    { avatar: req.user.avatar },
+    { avatar: req.body.avatar },
     { new: true, runValidators: true }
   )
   .orFail(() => {

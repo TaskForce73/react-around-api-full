@@ -10,28 +10,30 @@ function Main({
   onCardLike,
   onCardDelete,
 }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  
+  const  currentUser= React.useContext(CurrentUserContext);
+
 
   return (
     <main className="page">
       <section className="profile">
         <div onClick={onEditAvatarClick} className="profile__overlay"></div>
-        {currentUser.avatar && (
+        {currentUser.data.avatar && (
           <div
-            style={{ backgroundImage: `url(${currentUser.avatar})` }}
+            style={{ backgroundImage: `url(${currentUser.data.avatar})` }}
             aria-label="avatar"
             className="profile__image"
           />
         )}
         <div className="profile__info">
-          <h1 className="profile__author">{currentUser.name}</h1>
+          <h1 className="profile__author">{currentUser.data.name}</h1>
           <button
             onClick={onEditProfileClick}
             aria-label="edit"
             type="button"
             className="profile__edit"
           ></button>
-          <p className="profile__text">{currentUser.about}</p>
+          <p className="profile__text">{currentUser.data.about}</p>
         </div>
         <button
           onClick={onAddPlaceClick}

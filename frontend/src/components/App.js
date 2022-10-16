@@ -35,6 +35,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
+const [token, setToken] = React.useState(localStorage.getItem("jwt"));
 
   function handleEditProfileClick() {
     setChangePopupButtonText('Save');
@@ -72,20 +73,21 @@ function App() {
   }
 
   useEffect(() => {
+    if (token) {
     api
-      .getUserInfo()
+      .getUserInfo(token)
       .then((res) => {
         setCurrentUser(res);
       })
       .catch((err) => {
         console.log(err);
-      });
-  }, []);
+      })};
+  }, [token]);
 
-  function handleUpdateUser(data) {
+  function handleUpdateUser({name, about}) {
     setChangePopupButtonText('Saving...');
     api
-      .editProfile(data)
+      .editProfile({name, about}, token)
       .then((data) => {
         setCurrentUser(data);
       })
@@ -98,9 +100,10 @@ function App() {
   }
 
   function handleUpdateAvatar(avatar) {
+    console.log(avatar);
     setChangePopupButtonText('Saving...');
     api
-      .changeAvatar(avatar)
+      .changeAvatar(avatar, token)
       .then((data) => {
         setCurrentUser(data);
       })
@@ -115,13 +118,9 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
     api
-      .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(card._id, !isLiked, token)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard
-          )
-        );
+        setCards(cards=> cards.map(currentCard =>currentCard._id===card._id? newCard : currentCard))
       })
       .catch((err) => {
         console.log(err);
@@ -130,7 +129,7 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, token)
       .then(() => {
         setCards(cards.filter((currentCard) => currentCard._id !== card._id));
       })
@@ -143,22 +142,24 @@ function App() {
   }
 
   useEffect(() => {
+    if (token) {
     api
-      .getInitialCards()
+      .getInitialCards(token)
       .then((res) => {
-        setCards(res);
+        setCards(res.data);
       })
       .catch((err) => {
         console.log(err);
-      });
-  }, []);
+      })};
+  }, [token]);
 
   function handleAddPlaceSubmit({ name, link }) {
     setChangePopupButtonText('Saving...');
     api
-      .createCard({ name, link })
+      .createCard({ name, link }, token)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        console.log(newCard);
+        setCards([newCard.data, ...cards]);
       })
       .then(() => {
         setIsAddPlacePopupOpen(false);
@@ -171,10 +172,13 @@ function App() {
   const handleLogin = (password, email) => {
     authorize(password, email)
       .then((user) => {
+        if(user.token) {
           localStorage.setItem('jwt', user.token);
           setIsLoggedIn(true);
           setUserEmail(email);
+          setToken(user.token);
           navigate('/');
+        }
       })
       .catch((err) => {
         console.log(err);

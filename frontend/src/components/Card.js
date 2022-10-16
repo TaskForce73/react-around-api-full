@@ -23,14 +23,14 @@ function Card({
     onCardDelete(card);
   }
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser.data._id;
 
   const cardDeleteButtonClassName = `element__bin ${
     isOwn ? "element__bin" : "element__bin_hidden"
   }`;
 
   const isLiked = card.likes.some((user) => user._id === currentUser._id);
-
+ 
   const cardLikeButtonClassName = `element__button ${
     isLiked ? "element__button element__button_active" : "element__button"
   }`;

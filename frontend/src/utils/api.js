@@ -1,28 +1,36 @@
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
   }
 
   _checkResponse(res) {
    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   }
 
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
     }).then(this._checkResponse);
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
     }).then(this._checkResponse);
   }
 
-  editProfile({ name, about }) {
+  editProfile({ name, about }, token) {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
       method: "PATCH",
       body: JSON.stringify({
         name,
@@ -31,10 +39,13 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  createCard({ name, link }) {
+  createCard({ name, link }, token) {
     return fetch(`${this._baseUrl}/cards`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
       method: "POST",
-      headers: this._headers,
       body: JSON.stringify({
         name,
         link,
@@ -42,48 +53,55 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, token) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
     }).then(this._checkResponse);
   }
 
-  changeLikeCardStatus(cardId, like) {
+  changeLikeCardStatus(cardId, like, token) {
     if (like) {
-      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
         method: "PUT",
-        headers: this._headers,
         body: JSON.stringify({
           like,
         }),
       }).then(this._checkResponse);
     } else {
-      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-        method: "DELETE",
-        headers: this._headers,
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
+      method: "DELETE",
       }).then(this._checkResponse);
     }
   }
 
-  changeAvatar(avatar) {
+  changeAvatar(avatar, token) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
       method: "PATCH",
-      headers: this._headers,
       body: JSON.stringify({
         avatar,
       }),
     }).then(this._checkResponse);
   }
 }
-const jwt = localStorage.getItem('jwt');
+
 const api = new Api({
   baseUrl: "https://api.task.students.nomoredomainssbs.ru",
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${jwt}`,
-    "Content-Type": "application/json"
-}
 });
 
 export default api;

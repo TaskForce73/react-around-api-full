@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const AuthorizationError = require('../utils/authorizationerror');
 const NotFoundError = require('../utils/notfounderror');
 
-
 module.exports.getCards = (req, res, next) => {
   Card.find({})
   .orFail(() => {
@@ -49,7 +48,7 @@ module.exports.likeCard = (req, res, next) => {
     throw new NotFoundError('No card found with that id.');
   })
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch(next);
 };
@@ -64,7 +63,7 @@ module.exports.dislikeCard = (req, res, next) => {
     throw new NotFoundError('No card found with that id.');
   })
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
 .catch(next);
 };
