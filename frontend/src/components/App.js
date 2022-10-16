@@ -35,7 +35,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
-const [token, setToken] = React.useState(localStorage.getItem("jwt"));
+  const [token, setToken] = React.useState(localStorage.getItem('jwt'));
 
   function handleEditProfileClick() {
     setChangePopupButtonText('Save');
@@ -74,20 +74,21 @@ const [token, setToken] = React.useState(localStorage.getItem("jwt"));
 
   useEffect(() => {
     if (token) {
-    api
-      .getUserInfo(token)
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })};
+      api
+        .getUserInfo(token)
+        .then((res) => {
+          setCurrentUser(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [token]);
 
-  function handleUpdateUser({name, about}) {
+  function handleUpdateUser({ name, about }) {
     setChangePopupButtonText('Saving...');
     api
-      .editProfile({name, about}, token)
+      .editProfile({ name, about }, token)
       .then((data) => {
         setCurrentUser(data);
       })
@@ -100,7 +101,6 @@ const [token, setToken] = React.useState(localStorage.getItem("jwt"));
   }
 
   function handleUpdateAvatar(avatar) {
-    console.log(avatar);
     setChangePopupButtonText('Saving...');
     api
       .changeAvatar(avatar, token)
@@ -120,7 +120,11 @@ const [token, setToken] = React.useState(localStorage.getItem("jwt"));
     api
       .changeLikeCardStatus(card._id, !isLiked, token)
       .then((newCard) => {
-        setCards(cards=> cards.map(currentCard =>currentCard._id===card._id? newCard : currentCard))
+        setCards((cards) =>
+          cards.map((currentCard) =>
+            currentCard._id === card._id ? newCard : currentCard
+          )
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -143,14 +147,15 @@ const [token, setToken] = React.useState(localStorage.getItem("jwt"));
 
   useEffect(() => {
     if (token) {
-    api
-      .getInitialCards(token)
-      .then((res) => {
-        setCards(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })};
+      api
+        .getInitialCards(token)
+        .then((res) => {
+          setCards(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [token]);
 
   function handleAddPlaceSubmit({ name, link }) {
@@ -172,7 +177,7 @@ const [token, setToken] = React.useState(localStorage.getItem("jwt"));
   const handleLogin = (password, email) => {
     authorize(password, email)
       .then((user) => {
-        if(user.token) {
+        if (user.token) {
           localStorage.setItem('jwt', user.token);
           setIsLoggedIn(true);
           setUserEmail(email);

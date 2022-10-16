@@ -1,6 +1,6 @@
-import React from "react";
-import Card from "./Card";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main({
   onEditAvatarClick,
   onEditProfileClick,
@@ -10,9 +10,7 @@ function Main({
   onCardLike,
   onCardDelete,
 }) {
-  
-  const  currentUser= React.useContext(CurrentUserContext);
-
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main className="page">

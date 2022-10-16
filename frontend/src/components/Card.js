@@ -1,5 +1,5 @@
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import React from "react";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import React from 'react';
 function Card({
   card,
   link,
@@ -26,13 +26,13 @@ function Card({
   const isOwn = card.owner === currentUser.data._id;
 
   const cardDeleteButtonClassName = `element__bin ${
-    isOwn ? "element__bin" : "element__bin_hidden"
+    isOwn ? 'element__bin' : 'element__bin_hidden'
   }`;
 
   const isLiked = card.likes.some((user) => user._id === currentUser._id);
- 
+
   const cardLikeButtonClassName = `element__button ${
-    isLiked ? "element__button element__button_active" : "element__button"
+    isLiked ? 'element__button element__button_active' : 'element__button'
   }`;
   return (
     <>
