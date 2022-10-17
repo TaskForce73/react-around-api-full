@@ -1,4 +1,4 @@
-const httpStatusCodes = require('./httpstatuscodes');
+const httpStatusCodes = require('../utils/httpstatuscodes');
 
 class AuthorizationError extends Error {
   constructor(message, statusCode) {

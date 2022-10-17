@@ -18,6 +18,8 @@ const validateLink = (value, helpers) => (
 
 router.get('/', auth, getUsers);
 
+router.get('/users', getUsers);
+
 router.get('/users/me', auth, getUser);
 
 router.get(

@@ -163,7 +163,6 @@ function App() {
     api
       .createCard({ name, link }, token)
       .then((newCard) => {
-        console.log(newCard);
         setCards([newCard.data, ...cards]);
       })
       .then(() => {

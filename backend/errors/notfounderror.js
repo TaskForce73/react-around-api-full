@@ -1,5 +1,4 @@
-
-const httpStatusCodes = require('./httpstatuscodes');
+const httpStatusCodes = require('../utils/httpstatuscodes');
 
 class NotFoundError extends Error {
   constructor(message) {
