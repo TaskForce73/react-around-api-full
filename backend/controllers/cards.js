@@ -25,7 +25,13 @@ module.exports.createCard = (req, res, next) => {
         throw new CastError('Invalid data.');
       }
 })
-    .catch(next);
+.catch((err) => {
+  if (err.name === 'ValidationError') {
+    next(new CastError('Invalid data'));
+  } else {
+    next(err);
+  }
+});
 };
 
 module.exports.deleteCard = (req, res, next) => {

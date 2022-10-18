@@ -1,5 +1,4 @@
 export const BASE_URL = 'https://api.task.students.nomoredomainssbs.ru';
-
 const checkResponse = (res) =>
   res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 
